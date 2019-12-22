@@ -138,9 +138,10 @@ int main()
 		for (size_t y = 0; y < height; ++y)
 		{
 			vertices[y * width + x].pos = {
-			static_cast<float>(x) / static_cast<float>(width) - static_cast<float>(0.5f),
-			static_cast<float>(y) / static_cast<float>(height)* (static_cast<float>(height) / static_cast<float>(width))
-				- static_cast<float>(height) / static_cast<float>(width) / 2.0f
+				0.0f,
+				static_cast<float>(x) / static_cast<float>(width) - static_cast<float>(0.5f),
+				static_cast<float>(y) / static_cast<float>(height)* (static_cast<float>(height) / static_cast<float>(width))
+					- static_cast<float>(height) / static_cast<float>(width) / 2.0f
 			};
 
 			vertices[y * width + x].color = {
@@ -240,7 +241,7 @@ int main()
 
 	obj->setVertices(dp_VertexBuffer, vertices.size(), lbd);
 	auto pObj = obj.get();
-	pObj->setPosition(glm::vec3(0.0f, 0.0f, 1.0f));
+	pObj->setPosition(glm::vec3(4.0f, 0.0f, 0.0f));
 	app->add(std::move(obj));
 
 	size_t ultraZoomedIn = 4;
@@ -257,7 +258,7 @@ int main()
 			else if (ultraZoomedIn > 1)
 			{
 				ultraZoomedIn /= 2;
-				pObj->setPosition(glm::vec3(0.0f, 0.0f, 0.25f * ultraZoomedIn));
+				pObj->setPosition(glm::vec3(0.25f * ultraZoomedIn, 0.0f, 0.0f));
 			}
 			
 			break;
@@ -267,7 +268,7 @@ int main()
 			if (ultraZoomedIn < 4)
 			{
 				ultraZoomedIn *= 2;
-				pObj->setPosition(glm::vec3(0.0f, 0.0f, 0.25f * ultraZoomedIn));
+				pObj->setPosition(glm::vec3(0.25f * ultraZoomedIn, 0.0f, 0.0f));
 			}
 			else if (strideSize < 16)
 			{
@@ -307,7 +308,7 @@ int main()
 	app->keyPressed.add(labda_keyPressed);
 	app->keyReleased.add(labda_keyReleased);
 
-	app->setVSync(true);
+	//app->setVSync(true);
 	app->run();
 	
 
